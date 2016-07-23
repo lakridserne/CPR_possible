@@ -53,11 +53,17 @@
           if($day < 10) {
             $multiplied[$i] = 0*$values[$i];
             $numbers[$i] = 0;
+          } else {
+            $multiplied[$i] = substr($date,$i,1)*$values[$i];
+            $numbers[$i] = substr($date,$i,1);
           }
         } elseif($i == 2) {
           if($month < 10) {
             $multiplied[$i] = 0*$values[$i];
             $numbers[$i] = 0;
+          } else {
+            $multiplied[$i] = substr($date,$i,1)*$values[$i];
+            $numbers[$i] = substr($date,$i,1);
           }
         } else {
           $multiplied[$i] = substr($date,$i,1)*$values[$i];

@@ -42,6 +42,9 @@
       // Make 2 letter variable with year
       $yy = substr($year,2);
 
+      $day = str_pad($day,2,"0",STR_PAD_LEFT);
+      $month = str_pad($month,2,"0",STR_PAD_LEFT);
+
       // Combine first 6 numbers
       $date = $day . $month . $yy;
       // Now multiply by correct values
@@ -49,27 +52,11 @@
       $multiplied = array();
       $values = array(4,3,2,7,6,5,4,3,2);
       for($i = 0;$i<=5;$i++) {
-        if($i == 0) {
-          if($day < 10) {
-            $multiplied[$i] = 0*$values[$i];
-            $numbers[$i] = 0;
-          } else {
-            $multiplied[$i] = substr($date,$i,1)*$values[$i];
-            $numbers[$i] = substr($date,$i,1);
-          }
-        } elseif($i == 2) {
-          if($month < 10) {
-            $multiplied[$i] = 0*$values[$i];
-            $numbers[$i] = 0;
-          } else {
-            $multiplied[$i] = substr($date,$i,1)*$values[$i];
-            $numbers[$i] = substr($date,$i,1);
-          }
-        } else {
-          $multiplied[$i] = substr($date,$i,1)*$values[$i];
-          $numbers[$i] = substr($date,$i,1);
-        }
+        $multiplied[$i] = substr($date,$i,1)*$values[$i];
+        $numbers[$i] = substr($date,$i,1);
       }
+
+      print_r($numbers);
 
       // Now get the first number
       $firstnumbers = array();
@@ -134,6 +121,31 @@
           $total = 0;
         }
       }
+      ?>
+      <h2>New way</h2>
+      <p>Because of too few numbers there has been implemented a new way to generate numbers.<br />
+        Here under is displayed the additional numbers this would generate.</p>
+      <?php
+      $boy_series = array(1,7,3,9,5,11);
+      $girl_series = array(2,10,4,14,6,6);
+
+      // First is it a boy or a girl?
+      if(isset($_REQUEST['gender']) && $_REQUEST['gender'] == "boy") {
+        // it's a boy! Now, construct the CPR number
+        $i = 0;
+        foreach($numbers as $num) {
+          $cpr_test[] = $num;
+          $i++;
+          if($i>=5) {
+            break;
+          }
+        }
+
+        // This should be the correct date - test!!!
+        foreach($cpr_test as $c_num) {
+          echo $c_num;
+        }
+      }
     } else {
       echo "Wrong input";
     }
@@ -141,3 +153,9 @@
   ?>
 </body>
 </html>
+<?php
+// Function to check if a CPR number exists in modulus
+function check_modulus($cpr) {
+
+}
+?>

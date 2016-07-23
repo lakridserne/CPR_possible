@@ -13,15 +13,24 @@
     <input type="submit" name="submit" value="Generate CPR numbers!" />
   </form>
   <?php
-  if(isset($_REQUEST['submit'])) {
-    // form submitted - evaluate!
+  if(isset($_REQUEST['submit'])) {day,0,1
+     // form submitted - evaluate!
     // get values and make sure they are in the correct range
-    $day = filter_input(INPUT_POST, 'day', FILTER_VALIDATE_INT, array("options" => array(
-      "min_range" => 00,
+    $day = $_REQUEST['day'];
+    $month = $_REQUEST['month'];
+
+    if(substr($day,0,1) == 0) {
+      $day = substr($day,1);
+    }
+    if(substr($month,0,1) == 0) {
+      $month = substr($month,1);
+    }
+    $day = filter_var($day, FILTER_VALIDATE_INT, array("options" => array(
+      "min_range" => 0,
       "max_range" => 31
     )));
-    $month = filter_input(INPUT_POST, 'month', FILTER_VALIDATE_INT, array("options" => array(
-      "min_range" => 00,
+    $month = filter_var($month, FILTER_VALIDATE_INT, array("options" => array(
+      "min_range" => 0,
       "max_range" => 12
     )));
     $year = filter_input(INPUT_POST, 'year', FILTER_VALIDATE_INT, array("options" => array(
@@ -90,6 +99,9 @@
             if(isset($_REQUEST['gender']) && $_REQUEST['gender'] == "boy") {
               if($last % 2 != 0) {
                 // It is a boy
+                if($day < 10) {
+                  echo "0";
+                }
                 foreach($numbers as $cpr_num) {
                   echo $cpr_num;
                 }
@@ -97,6 +109,9 @@
               }
             } elseif(isset($_REQUEST['gender']) && $_REQUEST['gender'] == "girl") {
               if($last % 2 == 0) {
+                if($day < 10) {
+                  echo "0";
+                }
                 foreach($numbers as $cpr_num) {
                   echo $cpr_num;
                 }

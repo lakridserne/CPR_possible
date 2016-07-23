@@ -30,3 +30,4 @@ Thanks to http://kode.porten.dk/cpr_fix/ which have been a good guide for me.
 
 This was a small, fun project to make.
 
+Please note that you can also get numbers that's not necessarily in this output due to them using another formula, however they first use modulus 11. If they then have more births that day, then they use the other formula.

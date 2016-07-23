@@ -13,7 +13,7 @@
     <input type="submit" name="submit" value="Generate CPR numbers!" />
   </form>
   <?php
-  if(isset($_REQUEST['submit'])) {day,0,1
+  if(isset($_REQUEST['submit'])) {
      // form submitted - evaluate!
     // get values and make sure they are in the correct range
     $day = $_REQUEST['day'];

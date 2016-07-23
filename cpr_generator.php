@@ -136,7 +136,7 @@
         foreach($numbers as $num) {
           $cpr_test[] = $num;
           $i++;
-          if($i>=5) {
+          if($i>=6) {
             break;
           }
         }

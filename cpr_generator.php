@@ -59,9 +59,10 @@
             $multiplied[$i] = 0*$values[$i];
             $numbers[$i] = 0;
           }
+        } else {
+          $multiplied[$i] = substr($date,$i,1)*$values[$i];
+          $numbers[$i] = substr($date,$i,1);
         }
-        $multiplied[$i] = substr($date,$i,1)*$values[$i];
-        $numbers[$i] = substr($date,$i,1);
       }
 
       // Now get the first number
@@ -110,9 +111,6 @@
             if(isset($_REQUEST['gender']) && $_REQUEST['gender'] == "boy") {
               if($last % 2 != 0) {
                 // It is a boy
-                if($day < 10) {
-                  echo "0";
-                }
                 foreach($numbers as $cpr_num) {
                   echo $cpr_num;
                 }
@@ -120,9 +118,6 @@
               }
             } elseif(isset($_REQUEST['gender']) && $_REQUEST['gender'] == "girl") {
               if($last % 2 == 0) {
-                if($day < 10) {
-                  echo "0";
-                }
                 foreach($numbers as $cpr_num) {
                   echo $cpr_num;
                 }

@@ -1,6 +1,8 @@
 # CPR_possible
 Small project where I generate Danish CPR numbers.
 
+This can be tried here: https://www.rathhansen.com/cpr_generator.php
+
 Introduction to CPR
 ===================
 Danish readers will also benefit from this section since it contains some extra information about CPR.

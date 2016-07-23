@@ -49,8 +49,19 @@
       $multiplied = array();
       $values = array(4,3,2,7,6,5,4,3,2);
       for($i = 0;$i<=5;$i++) {
-        array_push($multiplied,substr($date,$i,1)*$values[$i]);
-        array_push($numbers,substr($date,$i,1));
+        if($i == 0) {
+          if($day < 10) {
+            $multiplied[$i] = 0*$values[$i];
+            $numbers[$i] = 0;
+          }
+        } elseif($i == 2) {
+          if($month < 10) {
+            $multiplied[$i] = 0*$values[$i];
+            $numbers[$i] = 0;
+          }
+        }
+        $multiplied[$i] = substr($date,$i,1)*$values[$i];
+        $numbers[$i] = substr($date,$i,1);
       }
 
       // Now get the first number

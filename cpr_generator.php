@@ -178,7 +178,7 @@
 
         // Get numbers and fill up arrays
         for($i=0;$i<2;$i++) {
-          $nextnum = $boy_series[$i][1] + 6;
+          $nextnum = $girl_series[$i][1] + 6;
           while($nextnum <= 9999) {
             array_push($girl_series[$i],$nextnum);
             $nextnum += 6;

@@ -14,6 +14,7 @@
   </form>
   <?php
   if(isset($_REQUEST['submit'])) {
+    $numbers_found = array();
      // form submitted - evaluate!
     // get values and make sure they are in the correct range
     $day = $_REQUEST['day'];
@@ -55,8 +56,6 @@
         $multiplied[$i] = substr($date,$i,1)*$values[$i];
         $numbers[$i] = substr($date,$i,1);
       }
-
-      print_r($numbers);
 
       // Now get the first number
       $firstnumbers = array();
@@ -106,15 +105,21 @@
                 // It is a boy
                 foreach($numbers as $cpr_num) {
                   echo $cpr_num;
+                  $cpr_number .= $cpr_num;
                 }
                 echo $last . "<br />";
+                $cpr_number .= $cpr_num;
+                array_push($numbers_found,$cpr_number);
               }
             } elseif(isset($_REQUEST['gender']) && $_REQUEST['gender'] == "girl") {
               if($last % 2 == 0) {
                 foreach($numbers as $cpr_num) {
                   echo $cpr_num;
+                  $cpr_number .= $cpr_num;
                 }
                 echo $last . "<br />";
+                $cpr_number .= $cpr_num;
+                array_push($numbers_found,$cpr_number);
               }
             }
           }
@@ -126,25 +131,72 @@
       <p>Because of too few numbers there has been implemented a new way to generate numbers.<br />
         Here under is displayed the additional numbers this would generate.</p>
       <?php
-      $boy_series = array(1,7,3,9,5,11);
-      $girl_series = array(2,10,4,14,6,6);
+      $boy_series = array(array(1,7),array(3,9),array(5,11));
+      $girl_series = array(array(2,10),array(4,14),array(6,6));
+      $new_numbers_found = array();
 
       // First is it a boy or a girl?
       if(isset($_REQUEST['gender']) && $_REQUEST['gender'] == "boy") {
         // it's a boy! Now, construct the CPR number
         $i = 0;
         foreach($numbers as $num) {
-          $cpr_test[] = $num;
+          $cpr_date .= $num;
           $i++;
           if($i>=6) {
             break;
           }
         }
 
-        // This should be the correct date - test!!!
-        foreach($cpr_test as $c_num) {
-          echo $c_num;
+        // Get numbers and fill up arrays
+        for($i=0;$i<2;$i++) {
+          $nextnum = $boy_series[$i][1] + 6;
+          while($nextnum <= 9999) {
+            array_push($boy_series[$i],$nextnum);
+            $nextnum += 6;
+          }
         }
+
+        // Now we have the date, pad the CPR number and pass
+        foreach($boy_series as $boynum) {
+          foreach($boynum as $num) {
+            if(!in_array($num,$numbers_found) && !in_array($num,$new_numbers_found)) {
+              $new_numbers_found[] = $num;
+            }
+          }
+        }
+      }
+      if(isset($_REQUEST['gender']) && $_REQUEST['gender'] == "girl") {
+        // it's a girl! Now, construct the CPR number
+        $i = 0;
+        foreach($numbers as $num) {
+          $cpr_date .= $num;
+          $i++;
+          if($i>=6) {
+            break;
+          }
+        }
+
+        // Get numbers and fill up arrays
+        for($i=0;$i<2;$i++) {
+          $nextnum = $boy_series[$i][1] + 6;
+          while($nextnum <= 9999) {
+            array_push($girl_series[$i],$nextnum);
+            $nextnum += 6;
+          }
+        }
+
+        // Now we have the date, pad the CPR number and pass
+        foreach($girl_series as $girlnum) {
+          foreach($girlnum as $num) {
+            if(!in_array($num,$numbers_found) && !in_array($num,$new_numbers_found)) {
+              $new_numbers_found[] = $num;
+            }
+          }
+        }
+      }
+      asort($new_numbers_found);
+      foreach($new_numbers_found as $number) {
+        echo $date . str_pad($number,4,"0",STR_PAD_LEFT) . "<br />";
       }
     } else {
       echo "Wrong input";
@@ -153,9 +205,3 @@
   ?>
 </body>
 </html>
-<?php
-// Function to check if a CPR number exists in modulus
-function check_modulus($cpr) {
-
-}
-?>

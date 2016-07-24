@@ -30,4 +30,11 @@ Thanks to http://kode.porten.dk/cpr_fix/ which have been a good guide for me.
 
 This was a small, fun project to make.
 
-Please note that you can also get numbers that's not necessarily in this output due to them using another formula, however they first use modulus 11. If they then have more births that day, then they use the other formula.
+With the new method listed below the old method (because they first use the old modulus 11 method to assign numbers) there is a lot more possible numbers.
+
+It's basically built from a table shown on https://da.wikipedia.org/wiki/CPR-nummer#Hvordan_personnumre_tildeles (in Danish, sorry).
+
+There's 3 series for each gender (women / girls to the left on the Wikipedia page, men / boys to the right). The first 2 numbers is as given.
+When you then want to find the next, you add 6 to the last number (starting with the 2nd). You simply keep adding 6 until you reach the largest number before 10000.
+
+Before you add it you make sure that it has not been assigned before - so for example can't be validated with modulus 11.

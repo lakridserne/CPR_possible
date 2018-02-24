@@ -93,12 +93,12 @@
             $total += $mul;
           }
           $rest = $total % 11;
-          if($rest > 1) {
-            $last = 11-$rest;
+          if($rest >= 1) {
+            $last_num = 11-$rest;
           } elseif($rest == 0) {
-            $last = 0;
+            $last_num = 0;
           }
-          if(isset($last)) {
+          if(isset($last_num)) {
             // Valid CPR found, check if boy or girl
             if(isset($_REQUEST['gender']) && $_REQUEST['gender'] == "boy") {
               if($last % 2 != 0) {

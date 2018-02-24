@@ -17,6 +17,9 @@ sum_cpr = sum(multiplied)
 rest = sum_cpr % 11
 last_num = 11-rest
 if int(last_num) == int(cpr_num[9]):
-    print("CPR " + cpr_num + " is valid")
+    if int(last_num % 2 == 0) and gender == "girl":
+        print("CPR " + cpr_num + " is valid")
+    elif int(last_num % 2 != 0) and gender == "boy":
+        print("CPR " + cpr_num + " is valid")
 else:
     print("CPR " + cpr_num + " is not valid")

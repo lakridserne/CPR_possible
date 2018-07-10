@@ -1,7 +1,7 @@
 # This is a simple version of cpr_generator.php used to teach kids in Coding
 # Pirates how this works. It just validates the CPR number instead of generating a list
 
-cpr_num = "1902075921"
+cpr_num = "2812930081"
 gender = "boy"
 
 # multiply by control chiffers

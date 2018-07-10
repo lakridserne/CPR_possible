@@ -14,7 +14,7 @@
   </form>
   <?php
   if(isset($_REQUEST['submit'])) {
-    $numbers_found = array();
+    $numbers_found = [];
      // form submitted - evaluate!
     // get values and make sure they are in the correct range
     $day = $_REQUEST['day'];
@@ -79,7 +79,7 @@
         for($i=0;$i<=99;$i++) {
           if($i < 10) {
             $numbers[7] = 0;
-            $multiplied[7] = $values[7]*0;
+            $multiplied[7] = 0;
             $numbers[8] = $i;
             $multiplied[8] = $values[8]*$i;
           } else {
@@ -93,12 +93,12 @@
             $total += $mul;
           }
           $rest = $total % 11;
-          if($rest >= 1) {
-            $last_num = 11-$rest;
+          if($rest > 1) {
+            $last = 11-$rest;
           } elseif($rest == 0) {
-            $last_num = 0;
+            $last = 0;
           }
-          if(isset($last_num)) {
+          if(isset($last)) {
             // Valid CPR found, check if boy or girl
             if(isset($_REQUEST['gender']) && $_REQUEST['gender'] == "boy") {
               if($last % 2 != 0) {
@@ -108,7 +108,7 @@
                   $cpr_number .= $cpr_num;
                 }
                 echo $last . "<br />";
-                $cpr_number .= $cpr_num;
+                $cpr_number .= $last;
                 array_push($numbers_found,$cpr_number);
               }
             } elseif(isset($_REQUEST['gender']) && $_REQUEST['gender'] == "girl") {
@@ -118,7 +118,7 @@
                   $cpr_number .= $cpr_num;
                 }
                 echo $last . "<br />";
-                $cpr_number .= $cpr_num;
+                $cpr_number .= $last;
                 array_push($numbers_found,$cpr_number);
               }
             }
